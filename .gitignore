@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pycache_local/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Local assistant state
+.assistant_memory.json
+.assistant.pid
+assistant.log
+assistant-daemon.log
+plugin_notes.txt
+browser-downloads/
+notes/
+screenshots/
+
+# Downloaded runtimes and models
+models/bin/
+models/llama-runtime/
+models/llm/
+models/piper/
+models/piper-runtime/
+models/whisper-runtime/
+models/whisper/
+third_party/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

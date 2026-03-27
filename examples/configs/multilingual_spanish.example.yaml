@@ -1,0 +1,42 @@
+# Runnable example config for use from the repo root, for example:
+# python main.py --config examples/configs/multilingual_spanish.example.yaml --text "que hora es"
+
+assistant:
+  hotword:
+    enabled: true
+    phrase: "hola asistente"
+
+audio:
+  trigger_mode: "voice"
+
+stt:
+  executable: "../../models/whisper-runtime/whisper-cli"
+  # Use a multilingual Whisper model rather than an `.en` model.
+  model: "../../models/whisper/ggml-base.bin"
+  language: "es"
+
+llm:
+  executable: "../../models/llama-runtime/llama-cli"
+  model: "../../models/llm/Phi-3-mini-4k-instruct-q4.gguf"
+
+tts:
+  executable: "../../models/piper-runtime/piper/piper"
+  # Replace with a Spanish Piper voice downloaded into models/piper/.
+  model: "../../models/piper/es_ES-sharvard-medium.onnx"
+  config: "../../models/piper/es_ES-sharvard-medium.onnx.json"
+
+tools:
+  plugins_dir: "../plugins"
+  workspace_root: "../.."
+  notes_dir: "../../notes"
+  screenshots_dir: "../../screenshots"
+
+memory:
+  path: "../../.assistant_memory.json"
+
+logging:
+  file: "../../assistant.log"
+
+runtime:
+  pid_file: "../../.assistant.pid"
+  daemon_log: "../../assistant-daemon.log"

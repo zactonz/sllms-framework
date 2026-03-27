@@ -1,0 +1,103 @@
+assistant:
+  name: "EdgeVoice"
+  hotword:
+    enabled: true
+    phrase: "hey assistant"
+  tts_enabled: true
+  log_level: "INFO"
+
+audio:
+  sample_rate: 16000
+  channels: 1
+  block_duration_ms: 30
+  silence_duration_s: 1.1
+  max_record_seconds: 12
+  energy_threshold: 450.0
+  # Optional specific input device index or name. Use `python main.py --list-audio-devices`.
+  device: null
+  # `voice` waits for speech automatically. `push_to_talk` requires Enter in the CLI
+  # or a manual trigger in embedded apps.
+  trigger_mode: "voice"
+
+stt:
+  executable: "models/whisper-runtime/whisper-cli"
+  model: "models/whisper/ggml-base.en.bin"
+  # Use `auto` with a multilingual Whisper model to detect the spoken language.
+  language: "en"
+  threads: 4
+
+llm:
+  executable: "models/llama-runtime/llama-cli"
+  model: "models/llm/Phi-3-mini-4k-instruct-q4.gguf"
+  ctx_size: 2048
+  max_tokens: 96
+  temperature: 0.0
+  top_p: 0.1
+  repeat_penalty: 1.05
+  threads: 4
+  timeout_seconds: 12
+
+tts:
+  executable: "models/piper-runtime/piper/piper"
+  model: "models/piper/en_US-lessac-medium.onnx"
+  config: "models/piper/en_US-lessac-medium.onnx.json"
+  speaker: 0
+  length_scale: 1.0
+  noise_scale: 0.667
+  noise_w: 0.8
+
+browser:
+  engine: "chromium"
+  channel: null
+  headless: false
+  timeout_ms: 10000
+  slow_mo_ms: 0
+  viewport_width: 1440
+  viewport_height: 900
+  downloads_dir: "browser-downloads"
+
+tools:
+  allow_run_command: false
+  allow_workspace_writes: false
+  allow_process_control: false
+  allow_power_actions: false
+  allow_sensitive_actions: false
+  allowed_commands:
+    - "echo"
+    - "dir"
+    - "ls"
+    - "pwd"
+    - "whoami"
+  plugins_dir: "plugins"
+  # Optional Python modules to import as tool packs.
+  plugin_modules: []
+  # When true, auto-load installed packages that expose the `sllms.plugins` entry point group.
+  enable_entrypoint_discovery: true
+  plugin_entrypoint_group: "sllms.plugins"
+  workspace_root: "."
+  notes_dir: "notes"
+  screenshots_dir: "screenshots"
+
+apis:
+  # Example:
+  # endpoints:
+  #   weather_demo:
+  #     url: "https://api.open-meteo.com/v1/forecast"
+  #     method: "GET"
+  #     timeout_seconds: 15
+  #     allowed_query_params: ["latitude", "longitude", "current_weather"]
+  #     allowed_body_fields: []
+  #     headers: {}
+  endpoints: {}
+
+memory:
+  enabled: true
+  path: ".assistant_memory.json"
+  max_items: 12
+
+logging:
+  file: "assistant.log"
+
+runtime:
+  pid_file: ".assistant.pid"
+  daemon_log: "assistant-daemon.log"

@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sllms-tool-pack-template"
+version = "0.1.0"
+description = "Template for building an external SLLMS tool-pack package."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["sllms-framework>=0.1.0"]
+
+[project.entry-points."sllms.plugins"]
+template = "sllms_tool_pack_template.plugin"
+
+[tool.setuptools.packages.find]
+where = ["src"]

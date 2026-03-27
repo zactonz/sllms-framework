@@ -1,0 +1,43 @@
+# Runnable example config for a hotword-enabled assistant robot style setup.
+# Run from the repo root:
+# python main.py --config examples/configs/home_robot.example.yaml --once
+
+assistant:
+  name: "HomeRobot"
+  hotword:
+    enabled: true
+    phrase: "hey robot"
+  tts_enabled: true
+
+audio:
+  trigger_mode: "voice"
+
+stt:
+  executable: "../../models/whisper-runtime/whisper-cli"
+  model: "../../models/whisper/ggml-base.en.bin"
+  language: "en"
+
+llm:
+  executable: "../../models/llama-runtime/llama-cli"
+  model: "../../models/llm/Phi-3-mini-4k-instruct-q4.gguf"
+
+tts:
+  executable: "../../models/piper-runtime/piper/piper"
+  model: "../../models/piper/en_US-lessac-medium.onnx"
+  config: "../../models/piper/en_US-lessac-medium.onnx.json"
+
+tools:
+  plugins_dir: "../plugins"
+  workspace_root: "../.."
+  notes_dir: "../../notes"
+  screenshots_dir: "../../screenshots"
+
+memory:
+  path: "../../.assistant_memory.json"
+
+logging:
+  file: "../../assistant.log"
+
+runtime:
+  pid_file: "../../.assistant.pid"
+  daemon_log: "../../assistant-daemon.log"

@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sllms-framework"
+version = "0.1.0"
+description = "Cross-platform offline voice assistant framework for edge devices."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+  {name = "Zactonz Technologies"}
+]
+keywords = [
+  "voice-assistant",
+  "offline-ai",
+  "edge-ai",
+  "whisper-cpp",
+  "llama-cpp",
+  "piper-tts"
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: MacOS",
+  "Operating System :: Microsoft :: Windows",
+  "Operating System :: POSIX :: Linux",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Multimedia :: Sound/Audio :: Speech",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+  "PyYAML>=6.0",
+  "numpy>=1.26.0",
+  "sounddevice>=0.4.6",
+]
+
+[project.scripts]
+sllms = "sllms_framework.cli:run"
+
+[tool.setuptools]
+py-modules = ["main"]
+
+[tool.setuptools.packages.find]
+include = ["llm*", "stt*", "tools*", "tts*", "utils*", "sllms_framework*"]
