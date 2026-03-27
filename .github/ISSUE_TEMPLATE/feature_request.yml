@@ -1,0 +1,53 @@
+name: Feature request
+description: Suggest a new framework capability or improvement.
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the suggestion. Please describe the problem you want to solve and how you expect SLLMS to help.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem statement
+      description: What use case or pain point is missing today?
+      placeholder: I want to build ...
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: What should SLLMS do?
+      placeholder: Add support for ...
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Any workarounds or competing approaches?
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - STT
+        - LLM intent parsing
+        - TTS
+        - Tool calling
+        - Plugins
+        - Docs
+        - Examples
+        - CI / packaging
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Target use cases
+      description: Who benefits and what could they build with it?
+      placeholder: voice assistant robot, dictation app, smart-home controller, desktop assistant

@@ -1,0 +1,48 @@
+name: Tool pack request
+description: Request a new built-in tool or a future external tool-pack repo.
+title: "[Tool Pack]: "
+labels:
+  - tool-pack
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form to suggest new tool integrations, plugin packs, or future standalone tool-pack repositories.
+  - type: textarea
+    id: use_case
+    attributes:
+      label: Use case
+      description: What should the tool or tool pack help developers build?
+      placeholder: Home automation, CRM workflows, browser automation, robotics, internal APIs
+    validations:
+      required: true
+  - type: textarea
+    id: tools
+    attributes:
+      label: Requested tools
+      description: List the commands, APIs, or actions the pack should expose.
+      placeholder: set_light_state, get_light_state, thermostat control, scene activation
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Target environment
+      description: What platforms, APIs, or devices should it support?
+      placeholder: Linux kiosk, Raspberry Pi, Home Assistant API, Philips Hue bridge
+  - type: textarea
+    id: safety
+    attributes:
+      label: Safety or permission concerns
+      description: Any guardrails, allowlists, or confirmation flows needed?
+      placeholder: Require allowlisting, disable destructive actions by default, support dry-run mode
+  - type: textarea
+    id: examples
+    attributes:
+      label: Example commands
+      description: Show the kinds of voice or text requests users should be able to make.
+      placeholder: |
+        "turn off the living room lights"
+        "set office temperature to 22 degrees"
+        "open the deployment dashboard"
