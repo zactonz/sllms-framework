@@ -18,6 +18,7 @@ from utils.process_control import BackgroundProcessManager
 
 
 LOGGER = logging.getLogger("voice_assistant")
+OPTIONAL_AUDIO_IMPORT_ERRORS = (ModuleNotFoundError, ImportError, OSError)
 
 
 class FeatureUnavailableError(RuntimeError):
@@ -78,7 +79,7 @@ class VoiceAssistantApp:
     def doctor(self) -> int:
         try:
             from stt.audio import AudioInputError, NoMicrophoneError
-        except ModuleNotFoundError:
+        except OPTIONAL_AUDIO_IMPORT_ERRORS:
             AudioInputError = RuntimeError
             NoMicrophoneError = RuntimeError
 
@@ -200,7 +201,7 @@ class VoiceAssistantApp:
     ) -> AssistantTurn:
         try:
             from stt.audio import write_wav_file
-        except ModuleNotFoundError as exc:
+        except OPTIONAL_AUDIO_IMPORT_ERRORS as exc:
             raise FeatureUnavailableError(
                 "Audio input features require the Python dependencies from requirements.txt, including numpy and sounddevice."
             ) from exc
@@ -223,7 +224,7 @@ class VoiceAssistantApp:
     ) -> int:
         try:
             from stt.audio import AudioInputError, NoMicrophoneError
-        except ModuleNotFoundError:
+        except OPTIONAL_AUDIO_IMPORT_ERRORS:
             AudioInputError = RuntimeError
             NoMicrophoneError = RuntimeError
 
@@ -316,7 +317,7 @@ class VoiceAssistantApp:
     def list_audio_devices(self) -> int:
         try:
             from stt.audio import AudioInputError
-        except ModuleNotFoundError:
+        except OPTIONAL_AUDIO_IMPORT_ERRORS:
             AudioInputError = RuntimeError
 
         try:
@@ -332,7 +333,7 @@ class VoiceAssistantApp:
             return self._recorder
         try:
             from stt.audio import MicrophoneRecorder
-        except ModuleNotFoundError as exc:
+        except OPTIONAL_AUDIO_IMPORT_ERRORS as exc:
             raise FeatureUnavailableError(
                 "Audio input features require the Python dependencies from requirements.txt, including numpy and sounddevice."
             ) from exc
@@ -346,7 +347,7 @@ class VoiceAssistantApp:
             raise FeatureUnavailableError("TTS is disabled in config.yaml.")
         try:
             from tts.piper import PiperTTS
-        except ModuleNotFoundError as exc:
+        except OPTIONAL_AUDIO_IMPORT_ERRORS as exc:
             raise FeatureUnavailableError(
                 "TTS playback requires the Python dependencies from requirements.txt, including numpy and sounddevice."
             ) from exc
@@ -356,7 +357,7 @@ class VoiceAssistantApp:
     def _list_input_devices(self) -> list[dict[str, Any]]:
         try:
             from stt.audio import MicrophoneRecorder
-        except ModuleNotFoundError as exc:
+        except OPTIONAL_AUDIO_IMPORT_ERRORS as exc:
             raise FeatureUnavailableError(
                 "Audio device inspection requires the Python dependencies from requirements.txt, including numpy and sounddevice."
             ) from exc
@@ -437,7 +438,7 @@ def missing_python_packages() -> list[str]:
 def main() -> int:
     try:
         from stt.audio import AudioInputError, NoMicrophoneError
-    except ModuleNotFoundError:
+    except OPTIONAL_AUDIO_IMPORT_ERRORS:
         AudioInputError = RuntimeError
         NoMicrophoneError = RuntimeError
 
